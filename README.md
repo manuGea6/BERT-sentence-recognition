@@ -1,35 +1,59 @@
-# TP BERT — Sentiment (FinancialPhraseBank)
+# TP BERT — Financial Sentiment Classification (Financial PhraseBank)
 
-Ce dossier contient un TP complet (corrigé) pour entraîner / évaluer un modèle **DistilBERT** sur le dataset **FinancialPhraseBank**.
+## Objectif
+Fine-tuner un modèle de type BERT (ex. DistilBERT) pour classifier le sentiment de phrases financières en **positive / neutral / negative** à partir du dataset **Financial PhraseBank** (fichiers `Sentences_*Agree.txt`).
 
 ## Contenu
-- `tp_bert_outputs_english_solution.ipynb` : notebook complet (chargement des données, split train/test, tokenization, modèle, entraînement avec Trainer, évaluation).
-- `FinancialPhraseBank-v1.0/` : fichiers `Sentences_*.txt` (AllAgree / 75Agree / 66Agree).
+- Notebook principal : `tp_bert_outputs_english_solution.ipynb`
+- Données : `FinancialPhraseBank-v1.0/`
+  - `Sentences_66Agree.txt`
+  - `Sentences_75Agree.txt`
+  - `Sentences_AllAgree.txt`
+- `requirements.txt`
 
-## Données (fichiers Sentences_*.txt)
-Chaque ligne est de la forme :
-`<phrase>@<label>`
-où `label ∈ {negative, neutral, positive}`.
+## Structure
+.
+├── tp_bert_outputs_english_solution.ipynb
+├── FinancialPhraseBank-v1.0/
+│ ├── Sentences_66Agree.txt
+│ ├── Sentences_75Agree.txt
+│ └── Sentences_AllAgree.txt
+└── requirements.txt
 
-## Exécution
-1. Installer les dépendances :
+
+## Installation
 ```bash
+python -m venv .venv
+# Linux / macOS
+source .venv/bin/activate
+# Windows (PowerShell)
+# .venv\Scripts\Activate.ps1
+
 pip install -r requirements.txt
 ```
 
-2. Lancer le notebook :
-```bash
-jupyter lab
-```
-ou dans VS Code / Colab (en uploadant le dossier).
+### Lancement
 
-## Changer de split / dataset
-Dans le notebook, modifiez la variable :
-```python
-filename = "FinancialPhraseBank-v1.0/Sentences_75Agree.txt"
-```
-vers `Sentences_66Agree.txt` ou `Sentences_AllAgree.txt`.
+  Ouvrir le notebook et exécuter les cellules dans l’ordre :
+  
+  Chargement + parsing des fichiers Sentences_*
+  
+  Split train/val/test
+  
+  Tokenization
+  
+  Fine-tuning (Transformers)
+  
+  Évaluation (Accuracy, F1 macro)
+  
+  Inference sur exemples
 
-## Notes
-- `FREEZE_PRETRAINED_MODEL=True` entraîne uniquement la tête de classification (plus rapide).
-- Passez à `False` pour fine-tuner tout DistilBERT.
+### Notes
+
+  Les fichiers Sentences_*Agree.txt servent de support : ils contiennent des phrases annotées.
+  
+  Le notebook est compatible CPU (plus lent) et GPU (recommandé).
+
+### Auteur
+
+  Manuela Fongang-Kengne
